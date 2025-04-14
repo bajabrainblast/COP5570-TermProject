@@ -15,29 +15,48 @@ using namespace std;
 char DTMP[1000];
 
 vector<string> files;
-vector<mg_patt> patterns;
 vector<mg_find> finds;
+extern vector<mg_patt> patterns;
+extern bool consider_caps;
+extern vector<char> ignores;
 
 int read_args(int argc, char *argv[], string *term) {
     int i;
     
     DPRINT("ARGC: "); DIPRINT(argc); DPRINT("\n");
-    for (i = 1; i < argc; i += 2) {        
+    for (i = 1; i < argc; ) {        
         if (argv[i][0] != '-') return 1; /* flagless parameter */
-        else if (i + 1 == argc) return 2; /* unmatched -p */
-        else if (argv[i+1][0] == '-') return 3; /* flag followed by flag */
         
         /* can assume there's a following non-flag term */
-        if (!strcmp("-p", argv[i])) 
+        if (!strcmp("-p", argv[i])) { 
             patterns.push_back(mg_patt(string(argv[i+1])));
-        else if (!strcmp("-f", argv[i]))
+            /* todo allow multiple patterns */
+            i += 2;
+        }
+        else if (!strcmp("-f", argv[i])) {
             files.push_back(string(argv[i+1]));
+            /* todo allow multiple files */
+            i += 2;
+        }
         else if (!strcmp("-t", argv[i])) {
             if ((*term) == "\n")
                 (*term) = string(argv[i+1]);
             else
                 return 4; /* multiple terminators */
+            /* todo allow multiple terminators? probably not */
+            i += 2;
         }
+        else if (!strcmp("-i", argv[i])) {
+            /* todo fix this super unrobust */
+            ignores.push_back(argv[i+1][0]);
+            /* todo allow multiple ignores */
+            i += 2;
+        }
+        else if (!strcmp("-c", argv[i])) {
+            consider_caps = false;
+            i += 1;
+        }
+
     }
 
     if (DEBUG) {
@@ -47,6 +66,9 @@ int read_args(int argc, char *argv[], string *term) {
         cout << endl << "patterns: ";
         for (unsigned int j = 0; j < patterns.size(); j++)
             cout << patterns[j] << " | ";
+        cout << endl << "ignores: ";
+        for (unsigned int j = 0; j < ignores.size(); j++)
+            cout << ignores[j] << " | ";
         cout << endl;
     }
 

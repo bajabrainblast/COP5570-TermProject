@@ -4,6 +4,10 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <cctype>
+
+class mg_find;
+class mg_patt;
 
 class mg_find {
     public:

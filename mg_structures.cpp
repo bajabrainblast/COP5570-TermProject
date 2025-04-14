@@ -1,5 +1,32 @@
 #include "mg_structures.hpp"
 
+std::vector<mg_patt> patterns;
+bool consider_caps = true;
+std::vector<char> ignores;
+
+/* ----- helpers ----- */
+std::string mytolower(std::string *s) {
+    std::string res = "";
+    for (unsigned int i = 0; i < s->size(); i++)
+        res.push_back(std::tolower((*s)[i]));
+    return res;
+}
+std::string myignore(std::string *s) {
+    std::string res = "";
+    for (unsigned int i = 0; i < s->size(); i++) {
+        unsigned int j;
+        for (j = 1; j < ignores.size()+1; j++) {
+            if (((*s)[i]) == ignores[j-1]) {
+                j = 0;
+                break;  /* if find an ignored char, set j to sentinel */
+            }
+        }
+        if (j != 0)
+            res.push_back((*s)[i]);
+    }
+    return res;
+}
+
 /* ----- mg find ----- */
 mg_find::mg_find() {
     line = "default";
@@ -26,8 +53,12 @@ mg_patt::mg_patt(std::string s) {
     subpatterns.push_back(s);
 }
 int mg_patt::match(std::string line) {
+    std::string tline, tpatt;
+    tline = !consider_caps ? mytolower(&line) : line;
+    tline = myignore(&tline);
     for (std::vector<std::string>::iterator x = subpatterns.begin(); x != subpatterns.end(); x++) {
-        if (line.find((*x)) != std::string::npos)
+        tpatt = !consider_caps ? mytolower(&(*x)) : (*x);
+        if (tline.find(tpatt) != std::string::npos)
             return 1;
     }
     return 0;
