@@ -19,6 +19,8 @@ vector<mg_find> finds;
 extern vector<mg_patt> patterns;
 extern bool consider_caps;
 extern vector<char> ignores;
+extern bool line_numbers;
+extern double fuzz;
 
 int read_args(int argc, char *argv[], string *term) {
     int i;
@@ -55,6 +57,14 @@ int read_args(int argc, char *argv[], string *term) {
         else if (!strcmp("-c", argv[i])) {
             consider_caps = false;
             i += 1;
+        }
+        else if (!strcmp("-n", argv[i])) {
+            line_numbers = true;
+            i += 1;
+        }
+        else if (!strcmp("-z", argv[i])) {
+            fuzz = atof(argv[i+1]);
+            i += 2;
         }
 
     }
@@ -105,18 +115,20 @@ int main(int argc, char *argv[]) {
         ifstream f((*fi).c_str());
         if (!f.is_open())
             return 2; /* nonexistant file */
+        i = 0;
         while (mygetline(&f, &line, &term) == 0) { /* while able to read in line */
+            i++; /* incr line counter */
             /* handle that line */
             for (vector<mg_patt>::iterator pat = patterns.begin(); pat != patterns.end(); pat++) {
                 if (pat->match(line)) 
-                    finds.push_back(mg_find(line, *fi));
+                    finds.push_back(mg_find(line, *fi, i));
             }
         }
         f.close();
     }
     /* display finds */
     for (i = 0; i < finds.size(); i++)
-        cout << i << ":\t" << finds[i] << endl;
+        cout << finds[i] << endl;
 
     return 0;
 }

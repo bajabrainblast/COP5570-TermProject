@@ -3,6 +3,8 @@
 std::vector<mg_patt> patterns;
 bool consider_caps = true;
 std::vector<char> ignores;
+bool line_numbers = false;
+double fuzz = 0;
 
 /* ----- helpers ----- */
 std::string mytolower(std::string *s) {
@@ -28,16 +30,16 @@ std::string myignore(std::string *s) {
 }
 
 /* ----- mg find ----- */
-mg_find::mg_find() {
-    line = "default";
-    file = "default";
-}
-mg_find::mg_find(std::string l, std::string f) {
+mg_find::mg_find(std::string l, std::string f, int c) {
     line = l;
     file = f;
+    linenum = c;
 }
 std::ostream& operator<<(std::ostream &os, const mg_find &mgf) {
-    os << mgf.file << " | " << mgf.line;
+    os << mgf.file;
+    if (mgf.linenum != -1) 
+        os << ":" << std::setw(4) << mgf.linenum; 
+    os << " | " << mgf.line;
     return os;
 }
 
@@ -54,10 +56,10 @@ mg_patt::mg_patt(std::string s) {
 }
 int mg_patt::match(std::string line) {
     std::string tline, tpatt;
-    tline = !consider_caps ? mytolower(&line) : line;
-    tline = myignore(&tline);
+    tline = !consider_caps ? mytolower(&line) : line; /* if not considering caps, lowercase the line. else use normal line */
+    tline = myignore(&tline); /* remove any ignored characters */
     for (std::vector<std::string>::iterator x = subpatterns.begin(); x != subpatterns.end(); x++) {
-        tpatt = !consider_caps ? mytolower(&(*x)) : (*x);
+        tpatt = !consider_caps ? mytolower(&(*x)) : (*x); /* if not considering caps, lowercase the pattern. else use normal pattern */
         if (tline.find(tpatt) != std::string::npos)
             return 1;
     }

@@ -1,0 +1,67 @@
+Multigrep 
+
+By: 
+Quan Pham 
+Judas Smith 
+
+This development project is a multithreaded implementation of grep, in which heuristics are used to determine the optimal number of threads to navigate a particular filepath quickly and efficiently. The project focuses on proper multithreading practices, ensuring that the utility works seamlessly with all other existing UNIX tools as though it was the original grep. Users can specify much of the behavior through additional flags, including the search method (breadth vs depth first), output order (process 0 followed by process 1... vs interleaved), and more. The project should take approximately 4k lines of code. 
+
+ 
+
+Report 1: 
+
+During this increment we decided exactly which search behaviors would be modifiable. Users will be able to choose from the following list, with the potential for these choices to be made at the program’s discretion via heuristics if time allows. Many of these features are present in grep, and so must be implemented, but others are unique to this program. 
+
+Modifiable Behaviors: 
+Full or partial word search (If looking for “the” do we include “mother”). 
+Capitalization match (If looking for “who” do we include “WHO”). 
+End of line marker (Typically “\n”, but could be any character). 
+Ignored characters (If looking for “my” and ignoring “.” do we include “m.y”). 
+Fuzz level (If looking for “cool” do we include “coop” “pool” or “c_ool”). 
+Work distribution (Does each process get a line of text? A file? A single portion of a larger pattern?). 
+Output order (Does each process output as it finds them, or does process 0 output followed by 1, etc…). 
+Search method (Breadth first or depth first).  
+
+Much of the increment was spent researching the topic, with some of the most impactful insights coming from “agrep”, an open-source grep alternative first published in 1988. Through agrep we were able to better understand the internal workings of grep by extension and were given significantly more direction for how best to structure our implementation. Credit must also be given to GNU’s documentation for grep 3.11, as it gave us an out from having to painstakingly walk through the “man” pages. 
+
+Information / references 
+C grep implementation https://github.com/cartcrom/C-Grep-Implementation 
+GNU Grep https://www.gnu.org/software/grep/manual/grep.html 
+open source https://en.wikipedia.org/wiki/Agrep https://github.com/Wikinaut/agrep 
+
+ 
+
+Report 2: 
+
+During this increment, we implemented a sequential version of grep based on GNU’s 3.11 grep documentation and the opensource versions of grep previously detailed.  
+
+Of the behaviors listed in the last report, some have been changed. An updated list with each’s anticipated solution is below. 
+
+ 
+
+Modifiable Behaviors: 
+
+Full or partial word search (If looking for “the” do we include “mother”)? 
+Grep has special “anchoring” characters, ^ and $ for preceding and following whitespace, respectively. This is likely to be reviewed and changed, but for now adding extra spaces in the search term suffices. 
+
+Capitalization match (If looking for “who” do we include “WHO”). 
+This has been implemented as an additional flag, “-c” for ignore capitalization. All characters are treated as lowercase when searching for a matching pattern. 
+
+End of line marker (Typically “\n”, but could be any character). 
+This has been implemented as the flag “-t” for terminator. It allows the user to specify their own terminating character. 
+
+Ignored characters (If looking for “my” and ignoring “.” do we include “m.y”). 
+This has been implemented as the flag “-i". It allows the user to specify characters to be removed from a particular line before searching for a pattern match. 
+
+Fuzz level (If looking for “cool” do we include “coop” “pool” or “c_ool”). 
+This has proven more complicated than anticipated and requires more consideration before being implemented. Our working idea is as follows: If the fuzz level is 1, when searching for “cool” “coop” or “pool” would be allowed. “c_ool” would be a fuzz level of 2, as there are two characters that do not match. 
+
+Work distribution: Each Worker will work on a portion of text. We will use box allocation for this project to minimize the amount of communication between workers. 
+
+Output order (Does each worker output as it finds them, or does worker 0 output followed by 1, etc…). 
+Search method (Breadth first or depth first). 
+The remaining behaviors will be better specified as progress is made on parallelization. 
+
+ 
+
+As of now, we have decided our best option for parallelization is to use openMP and potentially MPI. Once fully functional, we may rework into pthreads, though much of what we would change with pthreads can also be managed through more detailed openMP pragma use. 

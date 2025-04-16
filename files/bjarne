@@ -1,0 +1,260 @@
+
+
+Wikipedia The Free Encyclopedia
+
+    Donate
+    Create account
+    Log in
+
+Contents
+(Top)
+Early life and education
+
+Career and research
+
+        C++
+        Awards and honors
+        Publications
+    References
+    External links
+
+Bjarne Stroustrup
+
+    Article
+    Talk
+
+    Read
+    Edit
+    View history
+
+Tools
+
+Appearance
+Text
+
+    Small
+    Standard
+    Large
+
+Width
+
+    Standard
+    Wide
+
+Color (beta)
+
+    Automatic
+    Light
+    Dark
+
+From Wikipedia, the free encyclopedia
+"Stroustrup" redirects here; not to be confused with Jakob Stoustrup.
+Bjarne Stroustrup
+Stroustrup in 2013
+Born	30 December 1950 (age 74)
+Aarhus, Denmark
+Nationality	Danish
+Alma mater	
+
+    Aarhus University (Cand.scient.)
+    University of Cambridge (PhD)
+
+Known for	C++
+Spouse	Marian Tinson
+​
+(m. 1975)​
+Children	2
+Awards	
+
+    Grace Murray Hopper Award (1993)
+    ACM Fellow (1994)
+    IEEE Fellow (1994)
+    NAE Member (2004) [1]
+    William Procter Prize for Scientific Achievement (2005)
+    Dr. Dobb's Excellence Award (2008)
+    Dahl–Nygaard Prize (2015)
+    CHM Fellow (2015)
+    IET Faraday Medal (2017)
+    Charles Stark Draper Prize (2018)
+    Computer Pioneer Award (2018)
+    John Scott Medal (2018)
+
+Scientific career
+Institutions	
+
+    Aarhus University
+    University of Cambridge
+    Texas A&M University
+    Bell Labs
+    Morgan Stanley
+    Columbia University
+
+Thesis	Communication and control in distributed computer systems (1979)
+Doctoral advisor	David Wheeler[2]
+Website	stroustrup.com
+
+Bjarne Stroustrup (/ˈbjɑːrnə ˈstrɒvstrʊp/; Danish: [ˈbjɑːnə ˈstʁʌwˀstʁɔp];[3][4] born 30 December 1950) is a Danish computer scientist, known for the development of the C++ programming language.[5] He led the Large-scale Programming Research department at Bell Labs, served as a professor of computer science at Texas A&M University, and spent over a decade at Morgan Stanley while also being a visiting professor at Columbia University. Since 2022 he has been a full professor at Columbia.[6]
+Early life and education
+
+Stroustrup was born in Aarhus, Denmark. His family was working class, and he attended local schools.[7]
+
+He attended Aarhus University from 1969 to 1975 and graduated with a Candidatus Scientiarum in mathematics with computer science.[8] His interests focused on microprogramming and machine architecture. He learned the fundamentals of object-oriented programming from its inventor, Kristen Nygaard, who frequently visited Aarhus.
+
+In 1979, he received his PhD in computer science from the University of Cambridge,[9][10] where his research on distributed computing was supervised by David Wheeler.[2][9]
+Career and research
+
+In 1979, Stroustrup began his career as a member of technical staff in the Computer Science Research Center of Bell Labs in Murray Hill, New Jersey. There, he began his work on C++ and programming techniques. Stroustrup was the head of AT&T Bell Labs' Large-scale Programming Research department, from its creation until late 2002. In 1993, he was made a Bell Labs fellow and in 1996, an AT&T Fellow.
+
+From 2002 to 2014, Stroustrup was the College of Engineering Chair Professor in Computer Science at Texas A&M University.[11][12] From 2011, he was made a University Distinguished Professor.
+
+From January 2014 to April 2022, Stroustrup was a technical fellow and managing director in the technology division of Morgan Stanley in New York City and a visiting professor in computer science at Columbia University.[13]
+
+As of July 2022, Stroustrup is a full professor of Computer Science at Columbia University.[14]
+C++
+Stroustrup (standing on left) at the March 1996 Santa Cruz meeting of the C++ Standards Committee
+
+Stroustrup is best known for his work on C++. In 1979, he began developing C++ (initially called "C with Classes"). In his own words, he "invented C++, wrote its early definitions, and produced its first implementation [...] chose and formulated the design criteria for C++, designed all its major facilities, and was responsible for the processing of extension proposals in the C++ standards committee." C++ was made generally available in 1985. For non-commercial use, the source code of the compiler and the foundation libraries was the cost of shipping (US$75); this was before Internet access was common. Stroustrup also published a textbook for the language in 1985, The C++ Programming Language.[15]
+
+The key language-technical areas of contribution of C++ are:
+
+    A static type system with equal support for built-in types and user-defined types (that requires control of the construction, destruction, copying, and movement of objects; and operator overloading).
+    Value and reference semantics.
+    Systematic and general resource management (RAII): constructors, destructor, and exceptions relying on them.
+    Support for efficient object-oriented programming: based on the Simula model with statically checked interfaces, multiple inheritance, and efficient implementation based on virtual function tables.
+    Support for flexible and efficient generic programming: templates with specialization and concepts.
+    Support for compile-time programming: template metaprogramming and compile-time evaluated functions ("constexpr functions").
+    Direct use of machine and operating system resources.
+    Concurrency support through libraries (where necessary, implemented using intrinsics).
+
+Stroustrup documented his principles guiding the design of C++ and the evolution of the language in his 1994 book, The Design and Evolution of C++,[16] and three papers for ACM's History of Programming Languages conferences.[17][18][19]
+
+Stroustrup was a founding member of the C++ standards committee (from 1989, it was an ANSI committee and from 1991 an ISO committee) and has remained an active member ever since. For 24 years he chaired the subgroup chartered to handle proposals for language extensions (Evolution Working Group).
+Awards and honors
+
+Selected honors[13]
+
+    2018: The Charles Stark Draper Prize from The US National Academy of Engineering for conceptualizing and developing the C++ programming language.
+    2018: The Computer Pioneer Award from The IEEE Computer Society for bringing object-oriented programming and generic programming to the mainstream with his design and implementation of the C++ programming language.
+    2017: The Faraday Medal from the IET (Institute of Engineering Technology) for significant contributions to the history of computing, in particular pioneering the C++ programming language.
+    2010: The University of Aarhus's Rigmor og Carl Holst-Knudsens Videnskabspris.
+    2005: The William Procter Prize for Scientific Achievement from Sigma Xi (the scientific research society) as the first computer scientist ever.
+    1993: The ACM Grace Murray Hopper award for his early work laying the foundations for the C++ programming language. Based on those foundations and Dr. Stroustrup's continuing efforts, C++ has become one of the most influential programming languages in the history of computing.
+
+Fellowships
+
+    Member of the National Academy of Engineering in 2004.
+    Fellow of the Association for Computing Machinery (ACM) in 1994.
+    Fellow of the Institute of Electrical and Electronics Engineers (IEEE) in 1994.
+    Fellow of the Computer History Museum for his invention of the C++ programming language in 2015.
+    Honorary Fellow of Churchill College, Cambridge in 2017.
+
+Honorary doctorates and professorships
+
+    He was awarded an honorary doctorate from the University Carlos III, Spain 2019.[20]
+    Stroustrup has been a noble doctor at ITMO University since 2013.[21]
+    Honorary Professor in Object Oriented Programming Languages, Department of Computer Science, University of Aarhus. 2010.
+
+Publications
+
+Stroustrup has written or co-written a number of publications,[22][23] including the books:
+
+    A Tour of C++ (1st, 2nd and 3rd edition)[24]
+    Programming: Principles and Practice Using C++[25]
+    The C++ Programming Language (1st, 2nd, 3rd, and 4th edition)[26]
+    The Design and Evolution of C++[27]
+    The Annotated C++ Reference Manual.[28]
+
+In all, these books have been translated into 21 languages.[29]
+
+More than 100 academic articles, including:
+
+    Thriving in a crowded and changing world[19]
+    Evolving a language in and for the real world[18]
+    B Stroustrup: What should we teach software developers? Why? CACM. January 2010. doi:10.1145/1629175.1629192
+    Gabriel Dos Reis and Bjarne Stroustrup: A Principled, Complete, and Efficient Representation of C++. Journal of Mathematics in Computer Science Volume 5, Issue 3 (2011), Page 335–356 doi:10.1007/s11786-011-0094-1. Special issue on Polynomial System Solving, System and Control, and Software Science.
+    Gabriel Dos Reis and Bjarne Stroustrup: General Constant Expressions for System Programming Languages. SAC-2010. The 25th ACM Symposium on Applied Computing. March 2010. doi:10.1145/1774088.1774537
+    Y. Solodkyy, G. Dos Reis, and B. Stroustrup: Open and Efficient Type Switch for C++. Proc. OOPSLA'12. doi:10.1145/2398857.2384686
+    Peter Pirkelbauer, Yuriy Solodkyy, Bjarne Stroustrup: Design and Evaluation of C++ Open Multi-Methods. In Science of Computer Programming (2009). Elsevier Journal. June 2009. doi:10.1016/j.scico.2009.06.002.
+    Gabriel Dos Reis and Bjarne Stroustrup: Specifying C++ Concepts. POPL06. January 2006. doi:10.1145/1111037.1111064
+    B. Stroustrup: Exception Safety: Concepts and Techniques. In Springer Verlag Lecture Notes in Computer Science, LNCS-2022. ISSN 0302-9743. ISBN 3-540-41952-7. April 2001.
+    B Stroustrup: Generalizing Overloading for C++2000. Overload, Issue 25. 1 April 1998.
+    B. Stroustrup: Why C++ isn't just an Object-Oriented Programming Language. Addendum to OOPSLA'95 Proceedings. OOPS Messenger, vol 6 no 4, pp 1–13. October 1995. doi:10.1145/260094.260207
+    B. Stroustrup: A History of C++: 1979–1991[17] Notices. Vol 28 No 3, pp 271–298. March 1993. Also, History of Programming languages (editors T.J. Begin and R.G. Gibson) Addison-Wesley, 1996.
+    B. Stroustrup: What is Object-Oriented Programming? (1991 revised version). Proc. 1st European Software Festival. February 1991.
+    B. Stroustrup: Data Abstraction in C. Bell Labs Technical Journal. vol 63. no 8 (Part 2), pp 1701–1732. October 1984. doi:10.1002/j.1538-7305.1984.tb00061.x
+    B. Stroustrup: Classes: An Abstract Data Type Facility for the C Language. Sigplan Notices, January 1982. doi:10.1145/947886.947893
+
+More than a hundred technical reports for the C++ standards committee (WG21)[30]
+References
+
+"Election to National Academy of Engineering, USA 2004".
+Bjarne Stroustrup at the Mathematics Genealogy Project Edit this at Wikidata
+Stroustrup, Bjarne. "How do you pronounce "Bjarne Stroustrup?"". Bjarne Stroustrup's Homepage. Archived from the original on 20 July 2012. Retrieved 18 November 2014.
+Stroustrup, Bjarne. "Bjarne pronounces his own name". Bjarne Stroustrup's Homepage. Archived from the original on 20 September 2012. Retrieved 18 November 2014.
+Wong, William (29 October 2013). "Interview: Bjarne Stroustrup Discusses C++". Electronic Design. Archived from the original on 22 November 2018. Retrieved 29 January 2014.
+"Bjarne Stroustrup". Columbia Engineering. 1 July 2020. Archived from the original on 13 October 2020. Retrieved 25 March 2023.
+"NAE Honors 2018 Draper Prize Winner" (PDF). stroustrup.com. 2 January 2020. Archived (PDF) from the original on 9 October 2022.
+"Bjarne Stroustrup" (PDF). Columbia University Fu Foundation School of Engineering and Applied Science. Archived (PDF) from the original on 6 January 2023. Retrieved 25 March 2023.
+Stroustrup, Bjarne (1979). Communication and control in distributed computer systems. cam.ac.uk (PhD thesis). University of Cambridge. OCLC 219769715. EThOS uk.bl.ethos.474113.
+Wong, William (26 November 2013). "Bjarne Stroustrup: C++ Creator Keeps RUNE Developing". Electronic Design. Archived from the original on 2 February 2014. Retrieved 29 January 2014.
+"Some Information about Bjarne Stroustrup". Archived from the original on 1 July 2007. Retrieved 27 June 2007.
+Communications, Texas A&M Engineering (8 September 2015). "Faculty – People – Computer Science & Engineering – College of Engineering". Cse.tamu.edu. Archived from the original on 12 February 2014. Retrieved 9 June 2016.
+Stroustrup, Bjarne (15 August 2022). "Some Information about Bjarne Stroustrup". stroustrup.com. Archived from the original on 2 January 2020. Retrieved 2 January 2020.
+"Bjarne Stroustrup ADJUNCT PROFESSOR OF COMPUTER SCIENCE". columbia.edu. August 2022. Archived from the original on 13 October 2020. Retrieved 30 January 2021.
+Stroustrup, Bjarne (2 January 2020). "The C++ Programming Language". stroustrup.com. Archived from the original on 31 December 2019. Retrieved 2 January 2020.
+Stroustrup, Bjarne (2 January 2020). "The Design and Evolution of C++". stroustrup.com. Archived from the original on 31 December 2019. Retrieved 2 January 2020.
+Stroustrup, Bjarne (2 January 2020). "A History of C++: 1979– 1991" (PDF). stroustrup.com. doi:10.1145/155360.155375. Archived (PDF) from the original on 16 August 2012.
+Stroustrup, Bjarne (2 January 2020). "Evolving a language in and for the real world: C++ 1991–2006" (PDF). stroustrup.com. doi:10.1145/1238844.1238848. S2CID 7518369. Archived (PDF) from the original on 9 October 2022.
+Stroustrup, Bjarne (June 2020). "Thriving in a crowded and changing world: C++ 2006–2020". Proceedings of the ACM on Programming Languages. 4: 1–168. doi:10.1145/3386320. S2CID 219603741.
+"Honoris Causa | UC3M". www.uc3m.es. Archived from the original on 12 April 2020. Retrieved 12 April 2020.
+"Ученый Совет НИУ ИТМО на заседании 25.06.2013 г. избрал Бьѐрна Страуструпа почетным доктором нашего университета" (PDF). Is.ifmo.ru. Archived (PDF) from the original on 9 October 2022. Retrieved 7 December 2017.
+Bjarne Stroustrup at DBLP Bibliography Server Edit this at Wikidata
+Bjarne Stroustrup publications indexed by the Scopus bibliographic database. (subscription required)
+Stroustrup, Bjarne (2013). A Tour of C++. Addison-Wesley Professional. ISBN 978-0-321-95831-0.
+Stroustrup, Bjarne (29 December 2008). Programming: Principles and Practice Using C++ (1st ed.). Addison-Wesley Professional. ISBN 978-0-321-54372-1.
+Stroustrup, Bjarne (23 May 2013). The C++ Programming Language (4th ed.). Addison-Wesley Publishing Company. ISBN 978-0-321-56384-2.
+Stroustrup, Bjarne (29 March 1994). Design and Evolution of C++ (1st ed.). Addison-Wesley Publishing Company. ISBN 978-0-201-54330-8.
+Ellis, Margaret A.; Stroustrup, Bjarne (1 January 1990). The Annotated C++ Reference Manual. Addison-Wesley Publishing Company. ISBN 978-0-201-51459-9.
+Stroustrup, Bjarne (2 January 2020). "Book Covers". stroustrup.com. Archived from the original on 20 July 2012. Retrieved 2 January 2020.
+
+    Stroustrup, Bjarne (2 January 2020). "My C++ Standards committee papers". stroustrup.com. Archived from the original on 31 December 2019. Retrieved 2 January 2020.
+
+External links
+
+    Media related to Bjarne Stroustrup at Wikimedia Commons
+
+    vte
+
+C++
+
+    vte
+
+Grace Murray Hopper Award recipients
+
+    vte
+
+Charles Stark Draper Prize recipients
+Authority control databases Edit this at Wikidata
+Categories:
+
+    1950 birthsAarhus University alumniFellows of Churchill College, CambridgeC++C++ peopleColumbia School of Engineering and Applied Science facultyDanish computer programmersDanish computer scientistsDanish expatriates in the United StatesFellows of the IEEEGrace Murray Hopper Award laureatesLiving peopleMembers of the United States National Academy of EngineeringAcademics from AarhusPeople from Watchung, New JerseyProgramming language designersScientists at Bell LabsTexas A&M University faculty1994 fellows of the Association for Computing Machinery
+
+    This page was last edited on 18 March 2025, at 15:03 (UTC).
+    Text is available under the Creative Commons Attribution-ShareAlike 4.0 License; additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+    Privacy policy
+    About Wikipedia
+    Disclaimers
+    Contact Wikipedia
+    Code of Conduct
+    Developers
+    Statistics
+    Cookie statement
+    Mobile view
+
+    Wikimedia Foundation
+    Powered by MediaWiki
+
+Bjarne Stroustrup
+Add topic
+

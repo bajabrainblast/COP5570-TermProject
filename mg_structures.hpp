@@ -5,18 +5,19 @@
 #include <vector>
 #include <iostream>
 #include <cctype>
+#include <iomanip>
 
 class mg_find;
 class mg_patt;
 
 class mg_find {
     public:
-        mg_find();
-        mg_find(std::string l, std::string f);
+        mg_find(std::string l = "default_line", std::string f = "default_file", int c = -1);
         friend std::ostream& operator<<(std::ostream &os, const mg_find &mgf);
     private:
         std::string line;
         std::string file;
+        int linenum;
 };
 
 class mg_patt {
