@@ -21,9 +21,12 @@ extern bool consider_caps;
 extern vector<char> ignores;
 extern bool line_numbers;
 extern double fuzz;
+extern bool parall_file;
+extern bool parall_line;
+extern bool parall_pattern;
 
 int read_args(int argc, char *argv[], string *term) {
-    int i;
+    int i, j;
     
     DPRINT("ARGC: "); DIPRINT(argc); DPRINT("\n");
     for (i = 1; i < argc; ) {        
@@ -66,7 +69,19 @@ int read_args(int argc, char *argv[], string *term) {
             fuzz = atof(argv[i+1]);
             i += 2;
         }
-
+        else if (!strcmp("-o", argv[i])) {
+            j = atoi(argv[i+1]);
+            if (j & 1)
+                parall_pattern = true;
+            if (j & 2)
+                parall_line = true;
+            if (j & 4)
+                parall_file = true;
+            if (DEBUG) {
+                printf("pattern %d\nline %d\nfile %d\n", parall_pattern, parall_line, parall_file);
+            }
+            i += 2;
+        }
     }
 
     if (DEBUG) {

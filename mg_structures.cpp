@@ -5,6 +5,9 @@ bool consider_caps = true;
 std::vector<char> ignores;
 bool line_numbers = false;
 double fuzz = 0;
+bool parall_file = false;
+bool parall_line = false;
+bool parall_pattern = false;
 
 /* ----- helpers ----- */
 std::string mytolower(std::string *s) {
