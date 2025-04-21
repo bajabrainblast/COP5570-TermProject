@@ -1,4 +1,5 @@
 #include "mg_structures.hpp"
+#include <regex>
 
 std::vector<mg_patt> patterns;
 bool consider_caps = true;
@@ -58,13 +59,20 @@ mg_patt::mg_patt(std::string s) {
     subpatterns.push_back(s);
 }
 int mg_patt::match(std::string line) {
+    /*
     std::string tline, tpatt;
-    tline = !consider_caps ? mytolower(&line) : line; /* if not considering caps, lowercase the line. else use normal line */
-    tline = myignore(&tline); /* remove any ignored characters */
+    tline = !consider_caps ? mytolower(&line) : line; // if not considering caps, lowercase the line. else use normal line
+    tline = myignore(&tline); // remove any ignored characters
     for (std::vector<std::string>::iterator x = subpatterns.begin(); x != subpatterns.end(); x++) {
-        tpatt = !consider_caps ? mytolower(&(*x)) : (*x); /* if not considering caps, lowercase the pattern. else use normal pattern */
+        tpatt = !consider_caps ? mytolower(&(*x)) : (*x); // if not considering caps, lowercase the pattern. else use normal pattern
         if (tline.find(tpatt) != std::string::npos)
             return 1;
+    }
+*/
+    std::regex pattern(original);
+    std::smatch match_term;
+    if (std::regex_search(line,match_term,pattern)) {
+        std::cout << line << std::endl;
     }
     return 0;
 }
