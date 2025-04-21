@@ -6,9 +6,7 @@ flags:
     -c                  |   disable capitalization check
     -n                  |   enable line numbers
     -z {FUZZPERCENT}    |   specify fuzz level. .75 would allow "wood" to match search "dood".
-    -o {OPTLEVEL}       |   specify parallelization level. used as a bitstring where the first bit
-                                determines file level parallelization, the second for line, and the third for pattern.
-                                to parallelize by file and by pattern, would use 101 or 5. 
+    -o {OPTLEVEL}       |   specify parallelization level. 1 parallelizes by file, 2 by line, and 3 by pattern. 
 demo:
     to show caps ignore correctness, run the following commands
     ./multigrep.out -f lorem -p "The"

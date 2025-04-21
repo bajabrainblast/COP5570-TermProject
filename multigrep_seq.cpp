@@ -71,12 +71,12 @@ int read_args(int argc, char *argv[], string *term) {
         }
         else if (!strcmp("-o", argv[i])) {
             j = atoi(argv[i+1]);
-            if (j & 1)
-                parall_pattern = true;
-            if (j & 2)
-                parall_line = true;
-            if (j & 4)
+            if (j == 1)
                 parall_file = true;
+            if (j == 2)
+                parall_line = true;
+            if (j == 3)
+                parall_pattern = true;
             if (DEBUG) {
                 printf("pattern %d\nline %d\nfile %d\n", parall_pattern, parall_line, parall_file);
             }

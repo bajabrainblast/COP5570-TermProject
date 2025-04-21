@@ -1,6 +1,9 @@
 CC = g++
 FLAGS = -Wall -pedantic -std=c++11
 
+all: multigrep_seq.out multigrep_omp.out
+
+
 multigrep_seq.out: multigrep_seq.o mg_structures.o
 	$(CC) $(FLAGS) multigrep_seq.o mg_structures.o -o multigrep_seq.out
 
