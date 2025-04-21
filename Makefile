@@ -1,11 +1,17 @@
 CC = g++
+MPI_CC = mpic++
 FLAGS = -Wall -pedantic -std=c++11
 
-all: multigrep_seq.out multigrep_omp.out
+all: multigrep_mpi.out multigrep_seq.out multigrep_omp.out
 
+multigrep_mpi.out: multigrep_mpi.o mg_structures.o
+	$(MPI_CC) $(FLAGS) multigrep_mpi.o mg_structures.o -o multigrep_mpi.out
 
 multigrep_seq.out: multigrep_seq.o mg_structures.o
 	$(CC) $(FLAGS) multigrep_seq.o mg_structures.o -o multigrep_seq.out
+
+multigrep_mpi.o: multigrep_mpi.cpp
+	$(MPI_CC) $(FLAGS) -c multigrep_mpi.cpp -o multigrep_mpi.o
 
 multigrep_seq.o: multigrep_seq.cpp
 	$(CC) $(FLAGS) -c multigrep_seq.cpp -o multigrep_seq.o
