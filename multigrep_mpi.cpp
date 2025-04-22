@@ -1,3 +1,5 @@
+#include <ios>
+#include <iterator>
 #include <string>
 #include <vector>
 #include <fstream>
@@ -26,6 +28,11 @@ extern double fuzz;
 extern bool parall_file;
 extern bool parall_line;
 extern bool parall_pattern;
+int current_byte;
+int begin_byte;
+int end_byte;
+int global_myid, global_numprocs;
+int myid, numprocs;
 
 int read_args(int argc, char *argv[], string *term) {
     int i, j;
@@ -109,24 +116,22 @@ int read_args(int argc, char *argv[], string *term) {
 int mygetline(ifstream *f, string *res, string *term) {
     char ch;
     res->clear();
-    while (f->get(ch)) {
+    while (current_byte < end_byte && f->get(ch) && ch != '\n') {
         res->push_back(ch);
+        /*
         if (res->size() >= term->size() && res->substr(res->size() - term->size()) == (*term)) {
             res->erase(res->size() - term->size());
             return 0;
         }
+        */
+        current_byte ++;
     }
+    current_byte ++;
     if (!res->empty())
         return 0;
-    return f->eof();
+    return f->eof() || current_byte >= end_byte;
 }
 
-int current_byte;
-int begin_byte;
-int end_byte;
-int global_myid, global_numprocs;
-int myid, numprocs;
-MPI_Comm WorkingComm;
 
 int main(int argc, char *argv[]) {
     MPI_Init(&argc,&argv);
@@ -141,25 +146,38 @@ int main(int argc, char *argv[]) {
     }
     for (vector<string>::iterator fi = files.begin(); fi != files.end(); fi++) {
         ifstream f((*fi).c_str());
-        if (!f.is_open())
+        if (!f.is_open()) {
+            MPI_Finalize();
             return 2; /* nonexistant file */
+        }
         struct stat file_stat;
         stat((*fi).c_str(),&file_stat);
         std::cout << "File size: " << file_stat.st_size << "bytes" << std::endl;
+        begin_byte = 0 + file_stat.st_size/global_numprocs*global_myid;
+        end_byte = 0 + file_stat.st_size/global_numprocs*(global_myid + 1);
+        std::cout << "process " << global_myid << " begin byte " << begin_byte << std::endl;
+        std::cout << "process " << global_myid << " end byte " << end_byte << std::endl;
+        current_byte = begin_byte;
+        f.seekg(current_byte,std::ios::beg);
         i = 0;
         while (mygetline(&f, &line, &term) == 0) { /* while able to read in line */
             i++; /* incr line counter */
             /* handle that line */
+            //std::cout << line << std::endl;
             for (vector<mg_patt>::iterator pat = patterns.begin(); pat != patterns.end(); pat++) {
                 if (pat->match(line)) 
                     finds.push_back(mg_find(line, *fi, i));
+                //std::cout << "1" << std::endl;
             }
+            //std::cout << "2" << std::endl;
         }
+        //std::cout << "3" << std::endl;
         f.close();
     }
     /* display finds */
     for (i = 0; i < finds.size(); i++)
         cout << finds[i] << endl;
+    MPI_Finalize();
 
     return 0;
 }
