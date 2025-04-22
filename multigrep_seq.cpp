@@ -9,7 +9,7 @@
 
 using namespace std;
 
-#define DEBUG 1
+#define DEBUG 0
 #define DPRINT(str) if (DEBUG) { fprintf(stderr, str); fflush(0); }
 #define DIPRINT(i) if (DEBUG) { sprintf(DTMP, "%d", i); fprintf(stderr, DTMP); fflush(0); }
 char DTMP[1000];

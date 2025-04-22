@@ -1,5 +1,7 @@
 #include "mg_structures.hpp"
+#include <list>
 #include <regex>
+#include <vector>
 
 std::vector<mg_patt> patterns;
 bool consider_caps = true;
@@ -9,6 +11,7 @@ double fuzz = 0;
 bool parall_file = false;
 bool parall_line = false;
 bool parall_pattern = false;
+std::list<std::string> results;
 
 /* ----- helpers ----- */
 std::string mytolower(std::string *s) {
@@ -69,10 +72,39 @@ int mg_patt::match(std::string line) {
             return 1;
     }
 */
+    if(line.length() == 0) {
+        return 0;
+    }
     std::regex pattern(original);
     std::smatch match_term;
     if (std::regex_search(line,match_term,pattern)) {
         std::cout << line << std::endl;
+    }
+    return 0;
+}
+
+int mg_patt::match_mpi(std::string line) {
+    if(line.length() == 0) {
+        return 0;
+    }
+    extern std::list<std::string> results;
+    std::regex pattern(original);
+    std::smatch match_term;
+    if (std::regex_search(line,match_term,pattern)) {
+        results.push_back(line);
+    }
+    return 0;
+}
+int mg_patt::match_mpi_first_line(std::string line) {
+    extern std::list<std::string> results;
+    std::regex pattern(original);
+    std::smatch match_term;
+    if (std::regex_search(line,match_term,pattern)) {
+        if (!parall_line)
+            std::cout << line << std::endl;
+        else {
+            results.push_front(line);
+        }
     }
     return 0;
 }

@@ -25,6 +25,8 @@ class mg_patt {
         mg_patt();
         mg_patt(std::string s);
         int match(std::string line);
+        int match_mpi(std::string line);
+        int match_mpi_first_line(std::string line);
         friend std::ostream& operator<<(std::ostream &os, const mg_patt &mgp);
     private:
         std::string original;

@@ -1,5 +1,6 @@
 #include <ios>
 #include <iterator>
+#include <ostream>
 #include <string>
 #include <vector>
 #include <fstream>
@@ -9,11 +10,12 @@
 #include <cstdio>
 #include <mpi.h>
 #include <sys/stat.h>
+#include <list>
 #include "mg_structures.hpp"
 
 using namespace std;
 
-#define DEBUG 1
+#define DEBUG 0
 #define DPRINT(str) if (DEBUG) { fprintf(stderr, str); fflush(0); }
 #define DIPRINT(i) if (DEBUG) { sprintf(DTMP, "%d", i); fprintf(stderr, DTMP); fflush(0); }
 char DTMP[1000];
@@ -33,6 +35,8 @@ int begin_byte;
 int end_byte;
 int global_myid, global_numprocs;
 int myid, numprocs;
+int line_index_relative;
+string first_line;
 
 int read_args(int argc, char *argv[], string *term) {
     int i, j;
@@ -109,6 +113,7 @@ int read_args(int argc, char *argv[], string *term) {
     if (patterns.size() == 0 || files.size() == 0)
         return 9; /* didnt find anything */
 
+    DPRINT("READ args successful \n");
     return 0;
 }
 
@@ -126,9 +131,28 @@ int mygetline(ifstream *f, string *res, string *term) {
         */
         current_byte ++;
     }
+    if (current_byte == end_byte && global_myid != global_numprocs-1) {
+        if (ch != '\n') {
+            int last_line_length = res->length() + 1;
+            MPI_Send(&last_line_length,1,MPI_INT,global_myid+1,0,MPI_COMM_WORLD);
+            char *last_line = (char *) malloc(last_line_length * sizeof(char));
+            strcpy(last_line,res->c_str());
+            MPI_Send(last_line,last_line_length,MPI_CHAR,global_myid+1,1,MPI_COMM_WORLD);
+            free(last_line);
+            res->clear();
+        }
+    }
     current_byte ++;
+    if (line_index_relative == 0) {
+        first_line = *res;
+        res->clear();
+        line_index_relative ++;
+        return 0;
+    }
+    line_index_relative ++;
     if (!res->empty())
         return 0;
+    DPRINT("2\n");
     return f->eof() || current_byte >= end_byte;
 }
 
@@ -152,31 +176,68 @@ int main(int argc, char *argv[]) {
         }
         struct stat file_stat;
         stat((*fi).c_str(),&file_stat);
-        std::cout << "File size: " << file_stat.st_size << "bytes" << std::endl;
+        //std::cout << "File size: " << file_stat.st_size << "bytes" << std::endl;
         begin_byte = 0 + file_stat.st_size/global_numprocs*global_myid;
         end_byte = 0 + file_stat.st_size/global_numprocs*(global_myid + 1);
-        std::cout << "process " << global_myid << " begin byte " << begin_byte << std::endl;
-        std::cout << "process " << global_myid << " end byte " << end_byte << std::endl;
+        //std::cout << "process " << global_myid << " begin byte " << begin_byte << std::endl;
+        //std::cout << "process " << global_myid << " end byte " << end_byte << std::endl;
         current_byte = begin_byte;
         f.seekg(current_byte,std::ios::beg);
         i = 0;
+        line_index_relative = 0;
         while (mygetline(&f, &line, &term) == 0) { /* while able to read in line */
+            /*
+            DPRINT(line.c_str());
+            DPRINT("\n");
+            */
             i++; /* incr line counter */
             /* handle that line */
             //std::cout << line << std::endl;
             for (vector<mg_patt>::iterator pat = patterns.begin(); pat != patterns.end(); pat++) {
+                pat->match_mpi(line);
+                /*
                 if (pat->match(line)) 
                     finds.push_back(mg_find(line, *fi, i));
+                */
                 //std::cout << "1" << std::endl;
             }
             //std::cout << "2" << std::endl;
+        }
+        for (vector<mg_patt>::iterator pat = patterns.begin(); pat != patterns.end(); pat++) {
+            int first_line_from_previous_process_len;
+            MPI_Status status;
+            if (global_myid != 0) {
+                MPI_Recv(&first_line_from_previous_process_len,1,MPI_INT,global_myid-1,0,MPI_COMM_WORLD,&status);
+                char* first_line_from_previous_process = (char *) malloc(first_line_from_previous_process_len * sizeof(char));
+                MPI_Recv(first_line_from_previous_process,first_line_from_previous_process_len,MPI_CHAR,global_myid-1,1,MPI_COMM_WORLD,&status);
+                first_line = string(first_line_from_previous_process) + first_line;
+                free(first_line_from_previous_process);
+            }
+            pat->match_mpi_first_line(first_line);
         }
         //std::cout << "3" << std::endl;
         f.close();
     }
     /* display finds */
+    /*
     for (i = 0; i < finds.size(); i++)
         cout << finds[i] << endl;
+    */
+    char finish;
+    DPRINT("1\n");
+    if (global_myid != 0) {
+        MPI_Status status;
+        MPI_Recv(&finish,1,MPI_CHAR,global_myid-1,2,MPI_COMM_WORLD,&status);
+        DPRINT("3\n");
+    }
+    extern list<string> results;
+    for (auto line = results.begin(); line != results.end(); line ++) {
+        std::cout << *line << std::endl;
+    }
+    char send = 'a';
+    if (global_myid != global_numprocs-1) {
+        MPI_Send(&send,1,MPI_CHAR,global_myid+1,2,MPI_COMM_WORLD);
+    }
     MPI_Finalize();
 
     return 0;
